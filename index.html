@@ -4,212 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>การ์ดวาเลนไทน์ให้เหมย ❤️</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #FFF0F5; /* พื้นหลังสีชมพูอ่อน */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      overflow: hidden;
-    }
-    .envelope {
-      position: relative;
-      width: 300px; /* ปรับขนาดซองให้ใหญ่ขึ้น */
-      height: 180px; /* ปรับขนาดซองให้ใหญ่ขึ้น */
-      cursor: pointer;
-      transition: all 0.5s ease;
-    }
-    /* ส่วนหน้าซอง */
-    .envelope-front {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-color: #ffffff; /* สีขาว */
-      border: 2px solid #FF99FF; /* กรอบสีชมพูเข้ม */
-      border-radius: 10px; /* มุมโค้งมากขึ้น */
-      z-index: 2;
-      transition: transform 0.5s ease;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3); /* เพิ่มเงา */
-    }
-    /* ลายหัวใจบนซอง */
-    .envelope-front::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 10px,
-        #ff6b6b 10px,
-        #ff6b6b 20px
-      );
-      opacity: 0.2; /* ลดความเข้มของลาย */
-    }
-    /* ลายหัวใจเล็กๆ กระจายบนซอง */
-    .envelope-front::after {
-      content: '❤️❤️❤️';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 24px;
-      color: #FFCCFF;
-      opacity: 0.3;
-      animation: float-hearts 5s infinite ease-in-out;
-    }
-    @keyframes float-hearts {
-      0% {
-        transform: translate(-50%, -50%) scale(1);
-      }
-      50% {
-        transform: translate(-50%, -60%) scale(1.2);
-      }
-      100% {
-        transform: translate(-50%, -50%) scale(1);
-      }
-    }
-    /* ส่วนปากซอง */
-    .envelope-flap {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #FFCCFF, #ff8e8e); /* กราเดียนต์สีชมพู */
-      clip-path: polygon(0 0, 50% 50%, 100% 0);
-      transform-origin: top;
-      transition: transform 0.5s ease;
-      z-index: 3;
-      box-shadow: 0 -4px 10px rgba(255, 107, 107, 0.3); /* เพิ่มเงา */
-    }
-    /* ส่วนหลังซอง */
-    .envelope-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-color: #ffffff; /* สีขาว */
-      border: 2px solid #FFCCFF; /* กรอบสีชมพูเข้ม */
-      border-radius: 10px; /* มุมโค้งมากขึ้น */
-      z-index: 1;
-      box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3); /* เพิ่มเงา */
-    }
-    /* ข้อความด้านล่างซอง */
-    .envelope-text {
-      text-align: center;
-      font-size: 28px; /* ปรับขนาดข้อความให้ใหญ่ขึ้น */
-      font-weight: bold; /* ตัวหนา */
-      color: #FF99FF; /* สีชมพูเข้ม */
-      line-height: 1.5;
-      margin-top: 100px; /* ปรับระยะห่างจากซองจดหมาย */
-      width: 100%;
-      transition: opacity 0.5s ease;
-    }
-    /* กระดาษจดหมาย */
-    .letter {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%); /* จัดให้อยู่กลางจอ */
-      width: 90%; /* ปรับความกว้างของกระดาษให้ใหญ่ขึ้น */
-      max-width: 600px; /* จำกัดความกว้างสูงสุด */
-      height: auto; /* ความสูงปรับตามเนื้อหา */
-      min-height: 400px; /* กำหนดความสูงขั้นต่ำ */
-      background-color: #fff8f8; /* สีกระดาษ */
-      font-size: 20px; /* ปรับขนาดข้อความให้เหมาะสม */
-      font-weight: bold; /* ตัวหนา */
-      color: #ff6b6b; /* สีข้อความ */
-      text-align: left; /* จัดข้อความชิดซ้าย */
-      padding: 30px; /* เพิ่ม padding */
-      box-sizing: border-box; /* ให้ padding ไม่เพิ่มขนาด */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 1s ease, transform 1s ease; /* เพิ่มเวลา transition */
-      overflow: hidden; /* ซ่อนส่วนที่เกิน */
-    }
-        /* กระดาษจดหมาย */
-        .letter {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%); /* จัดให้อยู่กลางจอ */
-      width: 90%; /* ปรับความกว้างของกระดาษให้ใหญ่ขึ้น */
-      max-width: 600px; /* จำกัดความกว้างสูงสุด */
-      height: auto; /* ความสูงปรับตามเนื้อหา */
-      min-height: 400px; /* กำหนดความสูงขั้นต่ำ */
-      background-color: #fff8f8; /* สีกระดาษ */
-      font-size: 20px; /* ปรับขนาดข้อความให้เหมาะสม */
-      font-weight: bold; /* ตัวหนา */
-      color: #ff6b6b; /* สีข้อความ */
-      text-align: left; /* จัดข้อความชิดซ้าย */
-      padding: 30px; /* เพิ่ม padding */
-      box-sizing: border-box; /* ให้ padding ไม่เพิ่มขนาด */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 1s ease, transform 1s ease; /* เพิ่มเวลา transition */
-      overflow: hidden; /* ซ่อนส่วนที่เกิน */
-      /* เพิ่มพื้นหลังลายน้ำ */
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ctext x='50%' y='50%' font-size='20' fill='%23ff6b6b' fill-opacity='0.1' text-anchor='middle' dominant-baseline='middle'%3E❤️%3C/text%3E%3C/svg%3E");
-      background-repeat: repeat;
-      background-size: 80px 80px; /* ขนาดของลายน้ำ */
-    }
-    /* ข้อความหัวข้อกลาง */
-    .letter h1 {
-      text-align: center; /* จัดข้อความตรงกลาง */
-      font-size: 24px; /* ปรับขนาดข้อความหัวข้อ */
-      margin-bottom: 20px; /* ระยะห่างด้านล่าง */
-    }
-    /* เอฟเฟกต์หัวใจลอย */
-    .heart {
-      position: absolute;
-      color: #FFCCFF; /* สีหัวใจ */
-      font-size: 24px; /* ขนาดหัวใจ */
-      opacity: 0.9; /* ความโปร่งใส */
-      animation: float 5s infinite ease-in-out; /* เอฟเฟกต์ลอย */
-    }
-    @keyframes float {
-      0% {
-        transform: translateY(0) translateX(0) rotate(0deg);
-        opacity: 0.9;
-      }
-      50% {
-        transform: translateY(-20px) translateX(10px) rotate(20deg);
-        opacity: 0.10;
-      }
-      100% {
-        transform: translateY(0) translateX(0) rotate(0deg);
-        opacity: 0.9;
-      }
-    }
-    /* เอฟเฟกต์เมื่อเปิดซอง */
-    .envelope.open .envelope-flap {
-      transform: rotateX(180deg);
-    }
-    .envelope.open .envelope-front {
-      transform: translateY(-20px);
-    }
-    .envelope.open ~ .envelope-text {
-      opacity: 0;
-    }
-    .envelope.open ~ .letter {
-      opacity: 1;
-      pointer-events: auto;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="envelope" onclick="openEnvelope()">
     <div class="envelope-front"></div>
     <div class="envelope-flap"></div>
     <div class="envelope-back"></div>
-    <!-- หัวใจลอยที่ซองจดหมาย -->
     <div class="heart" style="top: -10%; left: 10%;">❤️</div>
     <div class="heart" style="top: -20%; left: 80%;">❤️</div>
     <div class="heart" style="top: -30%; left: 30%;">❤️</div>
@@ -223,55 +24,27 @@
   <div class="letter" id="letter">
     <h1> Happy Valentine Day </h1>
     ถึงแฟนที่น่ารักของเค้า<br><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;ขอบคุณที่เข้ามาในชีวิตของเค้านะ เข้ามาเป็นความสุข ตั้งแต่มีเธอเค้ามีความสุข และทำให้เค้ายิ้มได้ทุกวันเลย
-    เค้าขอให้เรามีความสุขมากๆ ในวันแห่งความรัก และอยู่เป็นความสุขของกันและกันแบบนี้ตลอดไปนะ
-    อาจจะทำตัวไม่ดีบ้าง แต่ก็ขอให้เราทั้งคู่ปรับกันไปเรื่อยๆนะ
-    ขอบคุณเธอมากๆ ที่ไม่เคยปล่อยมือเค้าไปไหนเลย
-    เค้ารักเธอมากๆ เลยนะ 🐽🫶❤️
-    <!-- หัวใจลอยในกระดาษจดหมาย -->
+    &nbsp;&nbsp;&nbsp;&nbsp;ขอบคุณเธอมากๆเลยนะที่เข้ามาในชีวิตของเค้า ตั้งแต่มีเธอเค้ามีความสุข และทำให้เค้ายิ้มได้ทุกวันเลย เค้าขอให้เรามีความสุขมากๆ ในวันแห่งความรัก และอยู่เป็นความสุขของกันและกันแบบนี้ตลอดไปนะอาจจะทำตัวไม่ดีบ้าง แต่ก็ขอให้เราทั้งคู่ปรับกันไปเรื่อยๆนะขอบคุณเธอมากๆ ที่ไม่เคยปล่อยมือเค้าไปไหนเลย เค้ารักเธอมากๆ เลยนะ 🐽🫶❤️
     <div class="heart" style="top: 10%; left: 10%;">❤️</div>
     <div class="heart" style="top: 20%; left: 80%;">❤️</div>
     <div class="heart" style="top: 50%; left: 30%;">❤️</div>
     <div class="heart" style="top: 70%; left: 70%;">❤️</div>
     <div class="heart" style="top: 90%; left: 20%;">❤️</div>
   </div>
-
-  <script>
-    function openEnvelope() {
-      const envelope = document.querySelector('.envelope');
-      const letter = document.getElementById('letter');
-      const text = document.querySelector('.envelope-text');
-
-      // เปิดซองจดหมาย
-      envelope.classList.add('open');
-
-      // รอให้ซองเปิดเสร็จก่อนแล้วค่อยแสดงกระดาษจดหมาย
-      setTimeout(() => {
-        envelope.style.opacity = 0;
-        text.style.opacity = 0;
-      }, 50);
-
-      // เพิ่มดีเลย์ก่อนแสดงกระดาษจดหมาย
-      setTimeout(() => {
-        letter.style.opacity = 1;
-        letter.style.pointerEvents = 'auto';
-      }, 400);
-    }
-
-    // คลิกที่หน้าจอเพื่อปิดจดหมายและแสดงซองจดหมายอีกครั้ง
-    document.body.addEventListener('click', (event) => {
-      const envelope = document.querySelector('.envelope');
-      const letter = document.getElementById('letter');
-      const text = document.querySelector('.envelope-text');
-
-      if (!event.target.closest('.envelope') && !event.target.closest('.letter')) {
-        envelope.classList.remove('open');
-        envelope.style.opacity = 1;
-        text.style.opacity = 1;
-        letter.style.opacity = 0;
-        letter.style.pointerEvents = 'none';
-      }
-    });
-  </script>
+  <div class="letter-back" id="letter-back">
+    <h1> Memories with You </h1>
+    <div class="photo-container">
+      <div class="photo-frame">
+        <img src="https://media.discordapp.net/attachments/1241673963290099763/1339867094728052747/image0.jpg?ex=67b047f8&is=67aef678&hm=046e3994b9e841c4fc2770fd9b5d7a203b6545fee25ccb9c375e062109aa7778&=&format=webp&width=408&height=468" alt="Memory 1">
+      </div>
+      <div class="photo-frame">
+        <img src="https://media.discordapp.net/attachments/1241673963290099763/1339881970473242654/image0.jpg?ex=67b055d3&is=67af0453&hm=1a70692602e79783cf59900ea6b6e0bcc6dff55fc4fb197c6eff6c24e449d866&=&format=webp&width=444&height=468" alt="Memory 2">
+      </div>
+      <div class="photo-frame">
+        <img src="https://media.discordapp.net/attachments/1241673963290099763/1339867420105510972/image0.jpg?ex=67b04846&is=67aef6c6&hm=af678b8df3fa951baac896ff613372cb5d89676fb0c3b4a2129faa0ae12206d8&=&format=webp&width=375&height=467" alt="Memory 3">
+      </div>
+    </div>
+  </div>
+  <script src="scripts.js"></script>
 </body>
 </html>
